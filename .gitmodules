@@ -10,3 +10,6 @@
 	path = v0.9
 	url = https://github.com/afdaniele/compose-docs.git
   branch = v0.9
+[submodule "devel"]
+	path = devel
+	url = https://github.com/afdaniele/compose-docs
