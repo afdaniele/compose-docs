@@ -32,10 +32,7 @@ A detailed description of each part of the URL follows.
 ## Base
 
 The **BASE** of the URL is **mandatory** and contains the hostname of the server hosting **\\compose\\**.
-Its value is set in the file `/system/config/configuration.php` as `$BASE_URL`.
 The value of **BASE** can be retrieved by accessing the parameter `Configuration::$BASE`.
-
-WARN: The value of `$BASE_URL` in `/system/config/configuration.php` must end with a slash symbol `/`.
 
 
 ## Page

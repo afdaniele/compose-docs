@@ -36,7 +36,7 @@ We can install Apache easily using Ubuntu's package manager, `apt`.
 
 Install Apache by running
 
-```plain
+```shell
 sudo apt update
 sudo apt install apache2
 ```
@@ -45,29 +45,29 @@ sudo apt install apache2
 
 Run the following command to check your Apache configuration for syntax errors
 
-```plain
+```shell
 sudo apache2ctl configtest
 ```
 
 This should return something that looks like this:
 
-<pre>
-<span style="color:red">AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message</span>
+```shell
+AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.1.1. Set the &apos;ServerName&apos; directive globally to suppress this message
 Syntax OK
-</pre>
+```
 
 If you don't see the red warning above you can skip this step and go directly to the next one.
 
 If you do see the red warning message, then you need to manually specified the server's name. To
 do so, run the following command to run the in-terminal text editor nano
 
-```plain
+```shell
 sudo nano /etc/apache2/apache2.conf
 ```
 
 Move to the very end of the configuration file and add the line
 
-```plain
+```shell
 ServerName SERVER_HOSTNAME
 ```
 
@@ -78,15 +78,15 @@ Once done, press **Ctrl-X**, then **Y** and **Enter** to save the changes and cl
 
 Check your Apache configuration again
 
-```plain
+```shell
 sudo apache2ctl configtest
 ```
 
 This time, it should return something that looks like this:
 
-<pre>
+```shell
 Syntax OK
-</pre>
+```
 
 If you don't see the red warning anymore, you are done with this step, go to the next one.
 
@@ -97,7 +97,7 @@ If you still see the red warning message, make sure you followed the instruction
 
 Restart Apache by running the command
 
-```plain
+```shell
 sudo systemctl restart apache2
 ```
 
@@ -108,13 +108,13 @@ Next, we will make sure that your firewall allows HTTP and HTTPS traffic.
 First of all, let's check that UFW (Uncomplicated FireWall) has an application profile for Apache
 by running
 
-```plain
+```shell
 sudo ufw app list
 ```
 
 You show see something that looks like this
 
-```plain
+```shell
 Available applications:
   Apache
   Apache Full
@@ -125,13 +125,13 @@ Available applications:
 If you look at the *Apache Full* profile, it should show that it enables traffic to ports 80 and 443.
 Running the command
 
-```plain
+```shell
 sudo ufw app info "Apache Full"
 ```
 
 will show you information about the *Apache Full* profile like so
 
-```plain
+```shell
 Profile: Apache Full
 Title: Web Server (HTTP,HTTPS)
 Description: Apache v2 is the next generation of the omnipresent Apache web server.
@@ -142,7 +142,7 @@ Ports:
 
 We can now allow incoming traffic for this profile by running
 
-```plain
+```shell
 sudo ufw allow in "Apache Full"
 ```
 
@@ -151,7 +151,7 @@ sudo ufw allow in "Apache Full"
 
 Open your browser and navigate to
 
-```http
+```shell
 http://SERVER_HOSTNAME/
 ```
 
@@ -165,7 +165,7 @@ and you should see the Apache Default Page (similar to the one shown below).
 **\\compose\\** requires some dependencies to be installed on your system.
 Install the dependencies by running the following command.
 
-```plain
+```shell
 sudo apt install git php libapache2-mod-php php-mcrypt php-mysql php7.0-mbstring
 ```
 
@@ -177,13 +177,13 @@ NOTE: Make sure to install PHP-7.0 or newer. **\\compose\\** does not work with 
 **\\compose\\** uses Apache modules that are no enabled by default.
 Run the following command to enable them.
 
-```plain
+```shell
 sudo a2enmod rewrite
 ```
 
 Restart Apache to put these changes into effect.
 
-```plain
+```shell
 sudo systemctl restart apache2
 ```
 
@@ -194,7 +194,7 @@ sudo systemctl restart apache2
 Moreover, by default, Apache stores the website under `/var/www/html/`. Run the following command
 to change the configuration of the website and enable the URL Rewrite engine.
 
-```plain
+```shell
 sudo nano /etc/apache2/sites-available/000-default.conf
 ```
 
@@ -208,42 +208,42 @@ Make sure you replace the parts in red with the correct information.
 Once done, press **Ctrl-X**, then **Y** and **Enter**
 to save the changes and close the editor.
 
-<pre>
-&lt;&#8203;VirtualHost &#42;:80&#8203;&gt;
-    <span style="color:gray"># The ServerName directive sets the request scheme, hostname and port that
-	...
-	# However, you must set it for any further virtual host explicitly.</span>
+```apache
+<​VirtualHost *:80​>
+    # The ServerName directive sets the request scheme, hostname and port that
+    ...
+    # However, you must set it for any further virtual host explicitly.
 
-	ServerName <span style="color:#c7254e">SERVER_HOSTNAME</span>
+    ServerName SERVER_HOSTNAME
 
-	ServerAdmin <span style="color:#c7254e">YOUR_EMAIL_ADDRESS</span>
-	DocumentRoot <span style="color:#c7254e">COMPOSE_ROOT</span>/public_html/
+    ServerAdmin YOUR_EMAIL_ADDRESS
+    DocumentRoot COMPOSE_ROOT/public_html/
 
-	&lt;&#8203;Directory <span style="color:#c7254e">COMPOSE_ROOT</span>/public_html/ &#8203;&gt;
-        	DirectoryIndex index.php index.html
-        	AllowOverride All
-        	Require all granted
-    &lt;&#8203;/Directory&#8203;&gt;
+    <​Directory COMPOSE_ROOT/public_html/ ​>
+            DirectoryIndex index.php index.html
+            AllowOverride All
+            Require all granted
+    <​/Directory​>
 
-	<span style="color:gray"># Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
-	...
-	#LogLevel info ssl:warn</span>
+    # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+    ...
+    #LogLevel info ssl:warn
 
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-	<span style="color:gray"># For most configuration files from conf-available/, which are
-	...
-	#Include conf-available/serve-cgi-bin.conf</span>
-&lt;&#8203;/VirtualHost&#8203;&gt;
+    # For most configuration files from conf-available/, which are
+    ...
+    #Include conf-available/serve-cgi-bin.conf
+<​/VirtualHost​>
 
-&lt;&#8203;Directory "/"&#8203;&gt;
+<​Directory "/"​>
     Options FollowSymLinks
     AllowOverride None
     Order deny,allow
     Allow from all
-&lt;&#8203;/Directory&#8203;&gt;
-</pre>
+<​/Directory​>
+```
 
 NOTE: In the configuration file above, make sure that the suffix `/public_html/` is appended to the end of
 your `COMPOSE_ROOT`.
@@ -251,7 +251,7 @@ your `COMPOSE_ROOT`.
 
 Restart Apache to put these changes into effect.
 
-```plain
+```shell
 sudo systemctl restart apache2
 ```
 
@@ -260,13 +260,13 @@ sudo systemctl restart apache2
 
 Move to the directory `COMPOSE_ROOT`. Let it be the default `/var/www/html/` for example.
 
-```plain
+```shell
 cd /var/www/html/
 ```
 
 Download the latest version of **\\compose\\** by running.
 
-```plain
+```shell
 git clone https://github.com/afdaniele/compose.git ./
 ```
 

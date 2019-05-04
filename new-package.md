@@ -49,7 +49,7 @@ In order to create a new package `my_package`, we need to create its directory
 inside `PACKAGES_DIR`.<br/>
 Open a terminal, move to `PACKAGES_DIR` and run the following commands,
 
-```plain
+```shell
 mkdir my_package
 cd my_package
 ```
@@ -61,12 +61,12 @@ We can do this by creating a new JSON file inside `PACKAGE_ROOT` called
 `metadata.json`. Feel free to use any text-editor to do this. The minimal
 package metadata file contains the following fields:
 
-<pre>
+```json
 {
   "name": "My Package",
   "description": "A test package"
 }
-</pre>
+```
 
 It is very important to distinguish between the ID of a package and its name.
 The name of the directory containing the package defines its **ID**
@@ -144,7 +144,7 @@ Open a terminal, move to the directory `PACKAGE_ROOT` of the package
 that you want to publish (`PACKAGES_DIR/my_package` in this case), and run the
 following commands,
 
-```plain
+```shell
 git init
 git remote add origin https://github.com/my_username/compose-pkg-my_package
 git add ./*
@@ -177,7 +177,7 @@ The procedure for doing this is quite simple, and it comprises of three steps.
 2. we add our new package to it;
 3. we submit the new registry for approval;
 
-### Step 1:
+### Step 1: Fork the registry
 
 Go to
 [https://github.com/afdaniele/compose-assets-store](https://github.com/afdaniele/compose-assets-store/)
@@ -189,20 +189,20 @@ This will create a copy of the registry in your personal account.
 Follow the instructions and you will be redirected to a page with a URL
 that looks like the following.
 
-```plain
+```shell
 https://github.com/USERNAME/compose-assets-store
 ```
 
 where `USERNAME` will be replaced with your GitHub username.
 
 
-### Step 2:
+### Step 2: Add your package
 
 Now that we have our copy of the registry, we can add our package.
 Open a terminal and run the following commands (remember to replace
 `USERNAME` with your GitHub username),
 
-```plain
+```shell
 cd ~/
 git clone https://github.com/USERNAME/compose-assets-store
 cd compose-assets-store/
@@ -237,12 +237,12 @@ information about your package.
 
 Save the changes to the file `index` and run the following commands:
 
-```plain
+```shell
 git commit -m "added new package" index
-git push origin
+git push --all origin
 ```
 
-### Step 3:
+### Step 3: Create a Pull Request
 
 Now that we updated our copy of the registry, we can submit the change
 for approval. Open the URL
