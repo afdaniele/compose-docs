@@ -49,7 +49,7 @@ In order to create a new package `my_package`, we need to create its directory
 inside `PACKAGES_DIR`.<br/>
 Open a terminal, move to `PACKAGES_DIR` and run the following commands,
 
-```plain
+```shell
 mkdir my_package
 cd my_package
 ```
@@ -144,7 +144,7 @@ Open a terminal, move to the directory `PACKAGE_ROOT` of the package
 that you want to publish (`PACKAGES_DIR/my_package` in this case), and run the
 following commands,
 
-```plain
+```shell
 git init
 git remote add origin https://github.com/my_username/compose-pkg-my_package
 git add ./*
@@ -189,7 +189,7 @@ This will create a copy of the registry in your personal account.
 Follow the instructions and you will be redirected to a page with a URL
 that looks like the following.
 
-```plain
+```shell
 https://github.com/USERNAME/compose-assets-store
 ```
 
@@ -202,7 +202,7 @@ Now that we have our copy of the registry, we can add our package.
 Open a terminal and run the following commands (remember to replace
 `USERNAME` with your GitHub username),
 
-```plain
+```shell
 cd ~/
 git clone https://github.com/USERNAME/compose-assets-store
 cd compose-assets-store/
@@ -237,7 +237,7 @@ information about your package.
 
 Save the changes to the file `index` and run the following commands:
 
-```plain
+```shell
 git commit -m "added new package" index
 git push origin
 ```
