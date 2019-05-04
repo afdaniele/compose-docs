@@ -51,10 +51,10 @@ sudo apache2ctl configtest
 
 This should return something that looks like this:
 
-<pre>
-<span style="color:red">AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message</span>
+```shell
+AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.1.1. Set the &apos;ServerName&apos; directive globally to suppress this message
 Syntax OK
-</pre>
+```
 
 If you don't see the red warning above you can skip this step and go directly to the next one.
 
@@ -84,9 +84,9 @@ sudo apache2ctl configtest
 
 This time, it should return something that looks like this:
 
-<pre>
+```shell
 Syntax OK
-</pre>
+```
 
 If you don't see the red warning anymore, you are done with this step, go to the next one.
 
@@ -208,42 +208,42 @@ Make sure you replace the parts in red with the correct information.
 Once done, press **Ctrl-X**, then **Y** and **Enter**
 to save the changes and close the editor.
 
-<pre>
-&lt;&#8203;VirtualHost &#42;:80&#8203;&gt;
-    <span style="color:gray"># The ServerName directive sets the request scheme, hostname and port that
-	...
-	# However, you must set it for any further virtual host explicitly.</span>
+```apache
+<​VirtualHost *:80​>
+    # The ServerName directive sets the request scheme, hostname and port that
+    ...
+    # However, you must set it for any further virtual host explicitly.
 
-	ServerName <span style="color:#c7254e">SERVER_HOSTNAME</span>
+    ServerName SERVER_HOSTNAME
 
-	ServerAdmin <span style="color:#c7254e">YOUR_EMAIL_ADDRESS</span>
-	DocumentRoot <span style="color:#c7254e">COMPOSE_ROOT</span>/public_html/
+    ServerAdmin YOUR_EMAIL_ADDRESS
+    DocumentRoot COMPOSE_ROOT/public_html/
 
-	&lt;&#8203;Directory <span style="color:#c7254e">COMPOSE_ROOT</span>/public_html/ &#8203;&gt;
-        	DirectoryIndex index.php index.html
-        	AllowOverride All
-        	Require all granted
-    &lt;&#8203;/Directory&#8203;&gt;
+    <​Directory COMPOSE_ROOT/public_html/ ​>
+            DirectoryIndex index.php index.html
+            AllowOverride All
+            Require all granted
+    <​/Directory​>
 
-	<span style="color:gray"># Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
-	...
-	#LogLevel info ssl:warn</span>
+    # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+    ...
+    #LogLevel info ssl:warn
 
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-	<span style="color:gray"># For most configuration files from conf-available/, which are
-	...
-	#Include conf-available/serve-cgi-bin.conf</span>
-&lt;&#8203;/VirtualHost&#8203;&gt;
+    # For most configuration files from conf-available/, which are
+    ...
+    #Include conf-available/serve-cgi-bin.conf
+<​/VirtualHost​>
 
-&lt;&#8203;Directory "/"&#8203;&gt;
+<​Directory "/"​>
     Options FollowSymLinks
     AllowOverride None
     Order deny,allow
     Allow from all
-&lt;&#8203;/Directory&#8203;&gt;
-</pre>
+<​/Directory​>
+```
 
 NOTE: In the configuration file above, make sure that the suffix `/public_html/` is appended to the end of
 your `COMPOSE_ROOT`.

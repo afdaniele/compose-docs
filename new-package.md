@@ -61,12 +61,12 @@ We can do this by creating a new JSON file inside `PACKAGE_ROOT` called
 `metadata.json`. Feel free to use any text-editor to do this. The minimal
 package metadata file contains the following fields:
 
-<pre>
+```json
 {
   "name": "My Package",
   "description": "A test package"
 }
-</pre>
+```
 
 It is very important to distinguish between the ID of a package and its name.
 The name of the directory containing the package defines its **ID**

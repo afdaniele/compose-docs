@@ -89,9 +89,9 @@ docker images
 This will show you the list of Docker images available in your local
 machine. You should be able to see a line like the following.
 
-<pre>
+```shell
 afdaniele/compose         latest         f2238f9859bc         1 minute ago         589MB
-</pre>
+```
 
 
 ## Step 3: Pull Docker image
