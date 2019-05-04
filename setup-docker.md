@@ -55,7 +55,7 @@ likely that you can skip this step.
 If you want to build the Docker image yourself, you need to clone the repository
 locally. You can do so by running the commands,
 
-```plain
+```shell
 cd ~
 git clone https://github.com/afdaniele/compose
 cd ~/compose/
@@ -66,7 +66,7 @@ This will pull the latest version of **\\compose\\** in a directory called
 
 Move to the directory inside the repository containing the Dockerfiles,
 
-```plain
+```shell
 cd ./docker/master/
 ```
 
@@ -75,14 +75,14 @@ you need to navigate to the directory `./docker/arm32v7/` instead.
 
 You can now build the Docker image by running the following command.
 
-```plain
+```shell
 docker build -t afdaniele/compose:latest ./
 ```
 
 This will build the Docker image. After this command has finished,
 you can run the following command,
 
-```plain
+```shell
 docker images
 ```
 
@@ -101,7 +101,7 @@ previous step ([Step 2: Build Docker image](#step-2-build-docker-image)),
 you can pull it directly from DockerHub. To do so, run the following
 command,
 
-```plain
+```shell
 docker pull afdaniele/compose:latest
 ```
 
@@ -111,7 +111,7 @@ docker pull afdaniele/compose:latest
 Now that you have the Docker image for **\\compose\\**, you can run it
 by using the following command,
 
-```plain
+```shell
 docker run -itd -p 80:80 afdaniele/compose:latest
 ```
 
@@ -148,7 +148,7 @@ the container.
 
 Let's start by obtaining the source code by running the following commands.
 
-```plain
+```shell
 cd ~
 git clone https://github.com/afdaniele/compose
 ```
@@ -157,7 +157,7 @@ This will pull the latest version of **\\compose\\** in a directory called
 `compose` in your home directory. Let this be `/home/user/compose/`, for example.
 We can now run **\\compose\\** in Docker by running the command,
 
-```plain
+```shell
 docker run -itd -p 80:80 -v /home/user/compose/:/var/www/html/ afdaniele/compose:latest
 ```
 
