@@ -44,7 +44,7 @@ Your new page goes inside the directory `PAGES_DIR` of your package.
 In this case, the directory would be `PACKAGE_ROOT/pages/my_page/`.
 Open a terminal, move to `PACKAGE_ROOT` and run the following commands,
 
-```plain
+```shell
 mkdir -p ./pages/my_page
 cd ./pages/my_page
 ```
@@ -152,7 +152,7 @@ located in the `PAGE_ROOT` directory.
 Open a terminal, move to `PAGE_ROOT` (`PACKAGE_ROOT/pages/my_page/` in this case)
 and run the following command,
 
-```plain
+```shell
 echo "It works." >> index.php
 ```
 
