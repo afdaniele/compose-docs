@@ -9,6 +9,11 @@ comes with only one package pre-installed called `core`. Therefore, you cannot
 use this name.
 
 
+## Table of contents
+
+[toc]
+
+
 ## Prerequisites
 
 It is important that you are familiar with the concepts explained in the
@@ -112,8 +117,102 @@ to learn more about the package metadata files.
 
 ## Configurable parameters
 
-TODO: Available soon!
-Linked from:<br/>- [settings#package-specific-settings](settings#package-specific-settings).
+The ultimate goal is that of developing a package that we can share with
+everybody else over the internet (more on this in the upcoming section
+[Publish your package](#publish-your-package)). This requires our package
+to be able to adapt to different use cases. For example, if you are developing
+a package that lets a user connect to a MySQL database and retrieve data,
+you might want to give the user the option to set the hostname of the
+server, the name of the database, etc.
+This can be done in **\\compose\\** by using *configurable parameters*.
+
+First of all, we need to tell **\\compose\\** that we want to declare
+some parameters and provide some additional information about them
+(for example, the type of values that each parameter can accept).
+Parameters are defined by the package, not by a page, and they are
+defined in the file `PACKAGE_ROOT/configuration/metadata.json`.
+
+
+### Define configurable parameters
+
+Open a terminal and run the following commands,
+
+```shell
+cd PACKAGE_ROOT/
+mkdir configuration
+cd configuration
+```
+
+Use the text-editor you prefer to create the file `metadata.json` and
+place the following content in it:
+
+```json
+{
+  "configuration_content" : {
+    "my_text_parameter" : {
+      "title" : "My Parameter 1",
+      "type" : "text",
+      "default" : null,
+      "details" : "A magic parameter for my project"
+    },
+    "my_boolean_parameter" : {
+      "title" : "My Parameter 2",
+      "type" : "boolean",
+      "default" : true,
+      "details" : "Another magic parameter for my project"
+    }
+  }
+}
+```
+
+The snippet above defines two configurable parameters, `my_text_parameter` and
+`my_boolean_parameter`, of type `text` (string) and `boolean` respectively.
+Also, we are telling **\\compose\\** that if the user does not change them, their
+default values are `null` and `true` respectively.
+Save the file, open the browser and navigate to the url where your local
+copy of **\\compose\\** is installed.
+
+**\\compose\\** uses a cache system to speed up your application. This means
+that some files are not read from disk every time you reload a page, but
+fetched from a cache if they were cached before. This is true for configurable
+parameters as well. Go to the page **Settings**, **Cache** tab and click on
+**Clear cache**. Wait for the page to refresh.
+
+You should be able to see a new tab in the Settings page that reads
+<span class="keystroke"><i class="fa fa-cube" aria-hidden="true"></i> Package: <b>My Package</b></span>.
+Click on it and you should be able to see the two parameters you just
+defined. You can now use this tab to change the parameters for your package.
+
+NOTE: When you change the value of your parameters using the Settings page,
+**\\compose\\** will automatically clear the cache for you.
+
+
+### Read the value of a parameter
+
+Use the function
+[Core::getSetting()](classsystem_1_1classes_1_1_core#aafc1c79d1179abd8d5c906a51809344e)
+to access the value of your parameters.
+For example, you can access the value of the parameter `my_text_parameter`
+defined by the package `my_package` using the code,
+
+```php
+use \system\classes\Core;
+$param_value = Core::getSetting("my_text_parameter", "my_package");
+```
+
+
+### Set the value of a parameter
+
+Use the function
+[Core::setSetting()](classsystem_1_1classes_1_1_core#a251526b0d90564e1b4be318dfe724b9d)
+to set the value of your parameters.
+For example, you can assign the value `"Welcome!"` to the parameter
+`my_text_parameter` defined by the package `my_package` using the code,
+
+```php
+use \system\classes\Core;
+Core::setSetting("my_package", "my_text_parameter", "Welcome!");
+```
 
 
 ## Publish your package
