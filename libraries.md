@@ -13,10 +13,11 @@ The following table reports the Javascript libraries pre-installed in **\\compos
 |:--------------|:------------|:----------:|:-------:|:---------:|
 | **Bootstrap** | HTML, CSS, and JS framework for developing websites | v3.3.1     | [MIT](https://opensource.org/licenses/MIT) | [Link](https://getbootstrap.com/docs/3.3/) |
 | **jQuery**    | Cross-platform JavaScript library designed to simplify the client-side scripting of HTML | v1.11.1    | [MIT](https://opensource.org/licenses/MIT) | [Link](http://jquery.com/) |
-| **highlight.js** | Library for syntax highlighting in JavaScript | v9.12.0 | [BSD](https://github.com/isagalaev/highlight.js/blob/master/LICENSE) | [Link](https://highlightjs.org/) |
 | **Chart.js**   | Simple yet flexible JavaScript charting for designers & developers | v2.7.0     | [MIT](https://opensource.org/licenses/MIT) | [Link](https://www.chartjs.org/)
 | **CryptoJS**  | JavaScript implementations of cryptographic algorithms (Available: **MD5**, **SHA256**, **Base64**) | v3.0.2     | [BSD-3](https://opensource.org/licenses/BSD-3-Clause) | [Link](https://code.google.com/archive/p/crypto-js/)
 | **Google APIs** | Client library that provides access to Google REST APIs | latest | [Apache v2.0](http://www.apache.org/licenses/LICENSE-2.0) | [Link](https://github.com/google/google-api-javascript-client)
+| **Draggabilly** | Draggabilly makes it easy to drag and drop various elements on a web page | v2.2.0 | [MIT](https://opensource.org/licenses/MIT) | [Link](https://github.com/desandro/draggabilly)
+| **Packery** | A library that makes gapless and draggable layouts | v2.1.1 | [GPLv3](https://opensource.org/licenses/GPL-3.0) | [Link](https://github.com/metafizzy/packery)
 
 NOTE: You don't need to import any of these libraries while developing your application on **\\compose\\**, they
 are imported by default, just use them.
