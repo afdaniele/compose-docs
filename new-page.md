@@ -163,3 +163,34 @@ popping up on the top-left corner of the page canvas.
 Congratulations, you just created your first page.
 Feel free to create more pages, experiment with new icons, navbar order,
 etc.
+
+
+## Page content
+
+Your page can contain anything that a normal PHP page can.
+
+
+### Javascript and CSS libraries
+
+**\\compose\\** provides several Javascript and CSS libraries
+out of the box. Visit the page [Libraries](#libraries) to
+see a comprehensive list of Javascript and CSS libraries.
+
+
+### Images
+
+When it comes to images, you have two options:
+
+1. (**Recommended**) Place your image in the directory `PACKAGE_ROOT/images/`
+and use the function [Core::getImageURL()][getImageURL-documentation-link] as
+explained in the section [Packages -> Custom images](packages#custom-images)
+of the documentation.
+
+2. Add your image to the public data directory of your package and
+use its public link as explained in
+[Packages -> Data -> Public data](packages#public-data).
+
+
+<!-- Constants -->
+
+[getImageURL-documentation-link]: classsystem_1_1classes_1_1_core#a4b7bafdf7b847a3a0d6c3976c6680521
