@@ -176,6 +176,11 @@ Your page can contain anything that a normal PHP page can.
 out of the box. Visit the page [Libraries](#libraries) to
 see a comprehensive list of Javascript and CSS libraries.
 
+You can add custom Javascript and CSS files to your package by following
+the instructions in the sections
+[Packages -> Custom Javascript libraries](packages#custom-javascript-libraries) and
+[Packages -> Custom CSS Stylesheets](packages#custom-css-stylesheets).
+
 
 ### Images
 
