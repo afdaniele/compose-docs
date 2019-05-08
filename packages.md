@@ -205,6 +205,24 @@ For example, you can include the CSS stylesheet `my_style.css` provided by the p
 ```
 
 
+## Custom Images
+
+Packages in **\\compose\\** can include images, that you will later use
+in your pages. Images must be stored in `PACKAGE_ROOT/images/`.
+
+You can include a package-specific image in your code by using the function
+[getImageURL()][getImageURL-documentation-link] exported by
+the `Core` class. This function returns a URL that you can use as the attribute `src` of
+your `img` tag.
+
+For example, you can include the image `my_image.jpg` provided by the package
+`my_package` by writing
+
+```php
+<img src="<?php echo \system\classes\Core::getImageURL('my_image.jpg', 'my_package') ?>">
+```
+
+
 ## Data
 
 A package can store two types of data:
@@ -217,14 +235,14 @@ A package can store two types of data:
 
 The public data of a package is stored under `PACKAGE_ROOT/data/public/`.
 
-Let `my_package` be a package that contains the image `my_image.jpg` in its public
-data directory (i.e., `PACKAGE_ROOT/data/public/my_image.jpg`).
+Let `my_package` be a package containing the image `my_image.jpg` in its public
+data directory (`PACKAGE_ROOT/data/public/my_image.jpg`).
 This file will be accessible at the URL
 `http://SERVER_HOSTNAME/data/my_package/my_image.jpg`.
 
 NOTE: Neither **\\compose\\** nor the packages have access control over this data.
 This means that everybody who has access to your application can download it.
-Make sure you don't use it to store sensible information.
+Make sure you don't use it to store sensitive information.
 
 
 ### Private data
@@ -246,7 +264,8 @@ NOTE: Packages within the same instance of **\\compose\\** can access each
 others private data.
 
 
-[getJSscriptURL-documentation-link]: http://compose.afdaniele.com/documentation/classsystem_1_1classes_1_1_core.html#abf8818b9689322325d35a9a85debefda
-[getCSSstylesheetURL-documentation-link]: http://compose.afdaniele.com/documentation/classsystem_1_1classes_1_1_core.html#aced2ad53122efd8874920fe01562557b
+[getJSscriptURL-documentation-link]: classsystem_1_1classes_1_1_core#abf8818b9689322325d35a9a85debefda
+[getCSSstylesheetURL-documentation-link]: classsystem_1_1classes_1_1_core#aced2ad53122efd8874920fe01562557b
+[getImageURL-documentation-link]: classsystem_1_1classes_1_1_core#a4b7bafdf7b847a3a0d6c3976c6680521
 
 <!-- END -->
