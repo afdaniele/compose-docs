@@ -53,6 +53,8 @@ PACKAGE_ROOT&frasl;
 │   └── ...
 ├── css&frasl;
 │   └── ...
+├── scripts&frasl;
+│   └── ...
 ├── data&frasl;
 │   ├── public&frasl;
 │   │   └── ...
@@ -205,22 +207,33 @@ For example, you can include the CSS stylesheet `my_style.css` provided by the p
 ```
 
 
-## Custom Images
+## Custom PHP Scripts
 
-Packages in **\\compose\\** can include images, that you will later use
-in your pages. Images must be stored in `PACKAGE_ROOT/images/`.
+Some applications require an easy way to programmatically call PHP scripts.
+**\\compose\\** offers two solutions to this problem, **PHP Scripts** and **API Endpoints**.
+Unlike PHP Scripts, API Endpoints provide input arguments check,
+data type validation, authentication, and other features. Visit the page
+[Create new API end-point](FAKELINK#create-new-api-end-point)
+to learn more about API Endpoints in **\\compose\\**.
 
-You can include a package-specific image in your code by using the function
-[getImageURL()][getImageURL-documentation-link] exported by
-the `Core` class. This function returns a URL that you can use as the attribute `src` of
-your `img` tag.
+**PHP Scripts** are the simplest way to define PHP entrypoints that other applications
+can call.
 
-For example, you can include the image `my_image.jpg` provided by the package
-`my_package` by writing
+You can define a package-specific PHP script by creating a PHP file in the directory
+`PACKAGE_ROOT/scripts/` of your package.
 
-```php
-<img src="<?php echo \system\classes\Core::getImageURL('my_image.jpg', 'my_package') ?>">
+For example, you can create the PHP file `my_script.php` in the `PACKAGE_ROOT`
+of the package `my_package` (i.e., `PACKAGES_DIR/my_package/scripts/my_script.php`) and then
+call it using the url
+
+
 ```
+http://SERVER_HOSTNAME/script.php?package=my_package&script=my_script
+```
+
+WARN: **PHP Scripts** do not rely on any authentication system, this means
+that everybody can execute your PHP scripts. We suggest you to use **API Endpoints**
+whenever you can.
 
 
 ## Data
@@ -235,14 +248,14 @@ A package can store two types of data:
 
 The public data of a package is stored under `PACKAGE_ROOT/data/public/`.
 
-Let `my_package` be a package containing the image `my_image.jpg` in its public
-data directory (`PACKAGE_ROOT/data/public/my_image.jpg`).
+Let `my_package` be a package that contains the image `my_image.jpg` in its public
+data directory (i.e., `PACKAGE_ROOT/data/public/my_image.jpg`).
 This file will be accessible at the URL
 `http://SERVER_HOSTNAME/data/my_package/my_image.jpg`.
 
 NOTE: Neither **\\compose\\** nor the packages have access control over this data.
 This means that everybody who has access to your application can download it.
-Make sure you don't use it to store sensitive information.
+Make sure you don't use it to store sensible information.
 
 
 ### Private data
@@ -264,8 +277,7 @@ NOTE: Packages within the same instance of **\\compose\\** can access each
 others private data.
 
 
-[getJSscriptURL-documentation-link]: classsystem_1_1classes_1_1_core#abf8818b9689322325d35a9a85debefda
-[getCSSstylesheetURL-documentation-link]: classsystem_1_1classes_1_1_core#aced2ad53122efd8874920fe01562557b
-[getImageURL-documentation-link]: classsystem_1_1classes_1_1_core#a4b7bafdf7b847a3a0d6c3976c6680521
+[getJSscriptURL-documentation-link]: http://compose.afdaniele.com/documentation/classsystem_1_1classes_1_1_core.html#abf8818b9689322325d35a9a85debefda
+[getCSSstylesheetURL-documentation-link]: http://compose.afdaniele.com/documentation/classsystem_1_1classes_1_1_core.html#aced2ad53122efd8874920fe01562557b
 
 <!-- END -->
