@@ -15,5 +15,5 @@
 
 [submodule "devel"]
   path = devel
-  url = https://github.com/afdaniele/compose-docs
+  url = https://github.com/afdaniele/compose-docs.git
   branch = devel
