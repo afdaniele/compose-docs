@@ -205,6 +205,8 @@ or a new one in your home folder (e.g., `~/www/`). Let's refer to this directory
 `COMPOSE_ROOT`.
 
 Make sure you replace the parts in red with the correct information.
+The placeholders you will need to replace are `SERVER_HOSTNAME` (1 occurrence),
+`YOUR_EMAIL_ADDRESS` (1 occurrence), and `COMPOSE_ROOT` (2 occurrences).
 Once done, press **Ctrl-X**, then **Y** and **Enter**
 to save the changes and close the editor.
 
@@ -255,6 +257,80 @@ Restart Apache to put these changes into effect.
 sudo systemctl restart apache2
 ```
 
+### Step 10: (Optional) Configure SSL website
+
+**\\compose\\** supports SSL out of the box, so that you can use your SSL keys
+to enable transport over HTTPS. In order to configure your SSL website, you will
+need a certificate for your website and its private key.
+This is provided by a CA (Certification Authority) such as
+[https://letsencrypt.org/](Let's Encrypt).
+
+Once you have a certificate file and its private key file,
+run the following command to create the configuration for a new SSL website.
+
+```shell
+sudo nano /etc/apache2/sites-available/000-default-ssl.conf
+```
+
+Paste the test below and make sure you replace the parts in red with the correct
+information.
+The placeholders you will need to replace are `SERVER_HOSTNAME` (1 occurrence),
+`YOUR_EMAIL_ADDRESS` (1 occurrence), and `COMPOSE_ROOT` (2 occurrences).
+Once done, press **Ctrl-X**, then **Y** and **Enter**
+to save the changes and close the editor.
+
+
+```apache
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+    # The ServerName directive sets the request scheme, hostname and port that
+    ...
+    # However, you must set it for any further virtual host explicitly.
+
+    ServerName SERVER_HOSTNAME
+
+    ServerAdmin YOUR_EMAIL_ADDRESS
+    DocumentRoot COMPOSE_ROOT/public_html/
+
+    <​Directory COMPOSE_ROOT/public_html/ ​>
+            DirectoryIndex index.php index.html
+            AllowOverride All
+            Require all granted
+    <​/Directory​>
+
+    # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+    ...
+    #LogLevel info ssl:warn
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    # For most configuration files from conf-available/, which are
+    ...
+    #Include conf-available/serve-cgi-bin.conf
+
+    # SSL Configuration
+    SSLEngine on
+    SSLCertificateFile /var/www/ssl-apache/fullchain.pem
+    SSLCertificateKeyFile /var/www/ssl-apache/privkey.pem
+
+    # Optional SSL configuration files
+    IncludeOptional /var/www/ssl-apache/*.conf
+</VirtualHost>
+</IfModule>
+```
+
+NOTE: In the configuration file above, make sure that the suffix `/public_html/` is
+appended to the end of your `COMPOSE_ROOT`.
+
+Place your certificate file at `/var/www/ssl-apache/fullchain.pem` and
+the certificate key file at `/var/www/ssl-apache/privkey.pem`.
+
+Restart Apache to put these changes into effect.
+
+```shell
+sudo systemctl restart apache2
+```
 
 ## Install \\compose\\
 
