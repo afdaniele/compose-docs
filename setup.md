@@ -311,11 +311,11 @@ to save the changes and close the editor.
 
     # SSL Configuration
     SSLEngine on
-    SSLCertificateFile /var/www/ssl-apache/fullchain.pem
-    SSLCertificateKeyFile /var/www/ssl-apache/privkey.pem
+    SSLCertificateFile /var/www/ssl/certfile.pem
+    SSLCertificateKeyFile /var/www/ssl/privkey.pem
 
     # Optional SSL configuration files
-    IncludeOptional /var/www/ssl-apache/*.conf
+    IncludeOptional /var/www/ssl/*.conf
 </VirtualHost>
 </IfModule>
 ```
@@ -323,8 +323,8 @@ to save the changes and close the editor.
 NOTE: In the configuration file above, make sure that the suffix `/public_html/` is
 appended to the end of your `COMPOSE_ROOT`.
 
-Place your certificate file at `/var/www/ssl-apache/fullchain.pem` and
-the certificate key file at `/var/www/ssl-apache/privkey.pem`.
+Place your certificate file at `/var/www/ssl/certfile.pem` and
+the certificate key file at `/var/www/ssl/privkey.pem`.
 
 Restart Apache to put these changes into effect.
 

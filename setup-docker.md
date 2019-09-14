@@ -130,6 +130,24 @@ all the steps above. If you still have problems, take a look at the
 do not hesitate to open a new *Issue* on our [GitHub page](https://github.com/afdaniele/compose).
 
 
+### (Optional) Configure SSL
+
+**\\compose\\** supports SSL out of the box, so that you can use your SSL keys
+to enable transport over HTTPS. In order to configure your SSL website, you will
+need a certificate for your website and its private key.
+This is provided by a CA (Certification Authority) such as
+[Let's Encrypt](https://letsencrypt.org/).
+
+In order to enable SSL in the docker image of **\\compose\\** you need to set
+the environment variable `SSL=1` using the option `-e SSL=1`.
+**\\compose\\** expects to find the certificate file at `/var/www/ssl/certfile.pem`
+and the private key file at `/var/www/ssl/privkey.pem`.
+Use the options `-v HOST_CERTFILE_PATH:/var/www/ssl/certfile.pem` and
+`-v HOST_PRIVKEY_PATH:/var/www/ssl/privkey.pem` to mount these two files,
+where `HOST_CERTFILE_PATH` and `HOST_PRIVKEY_PATH` are the paths to the
+certificate file and private key file on your host OS.
+
+
 ## Develop with Docker
 
 When you use **\\compose\\** with Docker, the source code for **\\compose\\**
